@@ -7,6 +7,9 @@ module.exports = {
     filename: "[hash].js",
     path: path.resolve(__dirname, "dist"),
   },
+  resolve: {
+    extensions: [".ts", ".tsx", ".js", ".json"],
+  },
   plugins: [
     new HTMLWebPackPlugin({
       template: "src/index.html",
@@ -15,12 +18,16 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.m?js$/,
+        test: /\.(ts|js)x?$/,
         exclude: /(node_modules|bower_components)/,
         use: {
           loader: "babel-loader",
           options: {
-            presets: ["@babel/preset-env", "@babel/preset-react"],
+            presets: [
+              "@babel/preset-env",
+              "@babel/preset-react",
+              "@babel/preset-typescript",
+            ],
           },
         },
       },
