@@ -1,7 +1,11 @@
 const path = require("path");
 const HTMLWebPackPlugin = require("html-webpack-plugin");
+const ReactRefreshWebpackPlugin = require("@pmmmwh/react-refresh-webpack-plugin");
+
 module.exports = {
   mode: "development",
+  target: "web",
+  entry: "./src/index.tsx",
   output: {
     pathinfo: true,
     filename: "[hash].js",
@@ -14,6 +18,7 @@ module.exports = {
     new HTMLWebPackPlugin({
       template: "src/index.html",
     }),
+    new ReactRefreshWebpackPlugin(),
   ],
   module: {
     rules: [
@@ -28,6 +33,7 @@ module.exports = {
               "@babel/preset-react",
               "@babel/preset-typescript",
             ],
+            plugins: [require.resolve("react-refresh/babel")],
           },
         },
       },
